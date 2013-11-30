@@ -1,0 +1,39 @@
+import re 
+amino_groups = { '1':'[R|N|D|E|Q|H|K|S|T|Y]', '2':'[A|C|G|I|L|M|F|P|W|V]', '3':'[A|N|D|C|Q|G|H|I|L|M|F|P|S|T|W|Y|V]', '4':'[R|K]', '5':'E'}
+
+def trans(motif): 
+	do_zwrotu = '' 
+	for char in motif: 
+		if(re.search(char, '12345')): 
+			do_zwrotu += char.replace(char, amino_groups[char]) 
+		
+		else: do_zwrotu += char
+	return do_zwrotu
+	#print do_zwrotu
+
+def f(filename,m):
+	seq=''
+	o=open(filename).readlines()
+    	for line in o:
+        	if line[0] != ">":
+			seq=seq+line			
+			
+	#print seq
+	
+	motifs=[]
+	k = trans(m) 
+	#print k
+	sequence = '' 
+	dlugosc = len(m) 
+	licz = 0 
+	for literka in seq: 
+			licz =licz+1 
+			sequence += literka 
+			if(re.search(k, sequence)): 
+				print("Indeks: ", licz-dlugosc,licz-1) 
+				#print dlugosc 
+				print seq[licz-dlugosc:licz] 
+				motifs.append(seq[licz-dlugosc:licz])
+				sequence = '' 
+	print motifs
+f('5RSA.fasta.txt', 'N22')
