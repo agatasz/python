@@ -11,7 +11,7 @@ def trans(motif):
 	return do_zwrotu
 	#print do_zwrotu
 
-def f(filename,m):
+def find_motif(filename,m):
 	seq=''
 	o=open(filename).readlines()
     	for line in o:
@@ -36,4 +36,4 @@ def f(filename,m):
 				motifs.append(seq[licz-dlugosc:licz])
 				sequence = '' 
 	print motifs
-f('5RSA.fasta.txt', 'N22')
+find_motif('5RSA.fasta.txt', 'N22')
